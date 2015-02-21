@@ -300,6 +300,18 @@ namespace WebTestDateTime.WCFTestDateJaponSrv {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC", ReplyAction="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTCResponse")]
         System.Threading.Tasks.Task<System.DateTime> checkDateTimeForceUTCAsync(System.DateTime fechIn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFTestDate/checkDateTime_JSON", ReplyAction="http://tempuri.org/IWCFTestDate/checkDateTime_JSONResponse")]
+        string checkDateTime_JSON(System.DateTime fechIn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFTestDate/checkDateTime_JSON", ReplyAction="http://tempuri.org/IWCFTestDate/checkDateTime_JSONResponse")]
+        System.Threading.Tasks.Task<string> checkDateTime_JSONAsync(System.DateTime fechIn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC_JSON", ReplyAction="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC_JSONResponse")]
+        string checkDateTimeForceUTC_JSON(System.DateTime fechIn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC_JSON", ReplyAction="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC_JSONResponse")]
+        System.Threading.Tasks.Task<string> checkDateTimeForceUTC_JSONAsync(System.DateTime fechIn);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -351,6 +363,22 @@ namespace WebTestDateTime.WCFTestDateJaponSrv {
         
         public System.Threading.Tasks.Task<System.DateTime> checkDateTimeForceUTCAsync(System.DateTime fechIn) {
             return base.Channel.checkDateTimeForceUTCAsync(fechIn);
+        }
+        
+        public string checkDateTime_JSON(System.DateTime fechIn) {
+            return base.Channel.checkDateTime_JSON(fechIn);
+        }
+        
+        public System.Threading.Tasks.Task<string> checkDateTime_JSONAsync(System.DateTime fechIn) {
+            return base.Channel.checkDateTime_JSONAsync(fechIn);
+        }
+        
+        public string checkDateTimeForceUTC_JSON(System.DateTime fechIn) {
+            return base.Channel.checkDateTimeForceUTC_JSON(fechIn);
+        }
+        
+        public System.Threading.Tasks.Task<string> checkDateTimeForceUTC_JSONAsync(System.DateTime fechIn) {
+            return base.Channel.checkDateTimeForceUTC_JSONAsync(fechIn);
         }
     }
 }
