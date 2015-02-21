@@ -22,6 +22,16 @@ namespace WCFTestDate
         {
             return DateTime.SpecifyKind(fechIn, DateTimeKind.Utc);
         }
+
+        public String checkDateTime_JSON (DateTime fechIn)
+        {
+            return new JavaScriptSerializer().Serialize(fechIn);
+        }
+
+        public String checkDateTimeForceUTC_JSON(DateTime fechIn)
+        {
+            return new JavaScriptSerializer().Serialize(DateTime.SpecifyKind(fechIn, DateTimeKind.Utc));
+        }
         public CompositeType Test(DateTime datetime, TimeSpan offset, String timeZone)
         {
             CompositeTypeLite testCompositeTypeLite = new CompositeTypeLite();
