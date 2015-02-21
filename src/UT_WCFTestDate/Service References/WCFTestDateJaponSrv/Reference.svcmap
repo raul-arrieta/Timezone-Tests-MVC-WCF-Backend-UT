@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="50930f4d-c34d-45b0-ad2c-78805d108881" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://rauljapon.cloudapp.net/WCFTestDate.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WCFTestDate.wsdl" MetadataType="Wsdl" ID="8a28c706-dfc0-45d4-8ed2-71316e5645bd" SourceId="1" SourceUrl="http://rauljapon.cloudapp.net/WCFTestDate.svc?wsdl" />
+    <MetadataFile FileName="WCFTestDate.disco" MetadataType="Disco" ID="a5a97002-7cda-4ded-9623-182de51eca03" SourceId="1" SourceUrl="http://rauljapon.cloudapp.net/WCFTestDate.svc?disco" />
+    <MetadataFile FileName="WCFTestDate.xsd" MetadataType="Schema" ID="52404d9f-0870-4f50-bfaa-a94c388f4f6c" SourceId="1" SourceUrl="http://rauljapon.cloudapp.net/WCFTestDate.svc?xsd=xsd2" />
+    <MetadataFile FileName="WCFTestDate1.xsd" MetadataType="Schema" ID="1f1c0fd4-964d-4956-a21e-562c09c20702" SourceId="1" SourceUrl="http://rauljapon.cloudapp.net/WCFTestDate.svc?xsd=xsd1" />
+    <MetadataFile FileName="WCFTestDate2.xsd" MetadataType="Schema" ID="f9482b38-6ac4-46ca-ade8-87414101d6cd" SourceId="1" SourceUrl="http://rauljapon.cloudapp.net/WCFTestDate.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
