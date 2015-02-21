@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/WCFTestDate" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFTestDate" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://rauljapon.cloudapp.net/WCFTestDate.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="CompositeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="compositeTypeLite" nillable="true" type="tns:CompositeTypeLite" />
+      <xs:element minOccurs="0" name="compositeTypeLiteSerialized" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompositeType" nillable="true" type="tns:CompositeType" />
+  <xs:complexType name="CompositeTypeLite">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="horaCliente" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="horaServidor" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="horaUTC" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="offsetClienteEnCliente" type="ser:duration" />
+      <xs:element minOccurs="0" name="offsetClienteEnServidor" type="ser:duration" />
+      <xs:element minOccurs="0" name="offsetClienteRespectoClienteEnServidor" type="ser:duration" />
+      <xs:element minOccurs="0" name="offsetClienteRespectoServidorEnServidor" type="ser:duration" />
+      <xs:element minOccurs="0" name="offsetClienteRespectoUTCEnServidor" type="ser:duration" />
+      <xs:element minOccurs="0" name="offsetServidor" type="ser:duration" />
+      <xs:element minOccurs="0" name="timeZoneCliente" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="timeZoneServidor" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompositeTypeLite" nillable="true" type="tns:CompositeTypeLite" />
+</xs:schema>

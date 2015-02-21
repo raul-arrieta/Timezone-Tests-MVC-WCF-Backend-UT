@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript" src="~/Scripts/jquery-1.8.2.min.js"></script>
+<h2>Test</h2>
+
+<h3>Request log:</h3>
+<fieldset>
+    <div id="test"></div>
+</fieldset>
+
+<button id="start"></button>
+
+<script type="text/javascript">
+    var testDateWCF = (function () {
+        var url_checkDateTime = '@Url.Action("checkDateTime","Home")';
+        var url_checkDateTimeForceUTC = '@Url.Action("checkDateTimeForceUTC", "Home")';
+        var url_checkDateTime_ServerSide = '@Url.Action("checkDateTime_ServerSide", "Home")';
+        var url_checkDateTimeForceUTC_ServerSide = '@Url.Action("checkDateTimeForceUTC_ServerSide", "Home")';
+
+        var checkDateTime = function (checkDate) {
+            //$.ajax(url_checkDateTime + '?fechIn=' + JSON.stringify(checkDate), {
+            $.ajax({
+                type: "GET",
+                url: url_checkDateTime,
+                data: { fechIn: JSON.stringify(checkDate) },
+                success: function (data) {
+                    log("..checkDateTime - success");
+                    log(data);
+                },
+                error: function () {
+                    log("..checkDateTime - error");
+                }
+            });
+        };
+        var checkDateTimeForceUTC = function (checkDate) {
+            $.ajax({
+                type: "GET",
+                url: url_checkDateTimeForceUTC,
+                data: { fechIn: JSON.stringify(checkDate) },
+                success: function (data) {
+                    log("..checkDateTimeForceUTC - success");
+                    log(data);
+                },
+                error: function () {
+                    log("..checkDateTimeForceUTC - error");
+                }
+            });
+        };
+
+
+        var checkDateTime_ServerSide = function (checkDate) {
+            $.ajax({
+                type: "GET",
+                url: url_checkDateTime_ServerSide,
+                data: {},
+                success: function (data) {
+                    log("..checkDateTime_ServerSide - success");
+                    log(data);
+                },
+                error: function () {
+                    log("..checkDateTime_ServerSide - error");
+                }
+            });
+        };
+        var checkDateTimeForceUTC_ServerSide = function (checkDate) {
+            $.ajax({
+                type: "GET",
+                url: url_checkDateTimeForceUTC_ServerSide,
+                data: {},
+                success: function (data) {
+                    log("..checkDateTimeForceUTC_ServerSide - success");
+                    log(data);
+                },
+                error: function () {
+                    log("..checkDateTimeForceUTC_ServerSide - error");
+                }
+            });
+        };
+
+
+        var log = function (content) {
+            $('#test').append(content + '<br/>');
+        };
+        var runTest = function () {
+            log('<hl/>');
+            var testDate = new Date();
+            log(testDate);
+            checkDateTime(testDate);
+            checkDateTimeForceUTC(testDate);
+            checkDateTime_ServerSide();
+            checkDateTimeForceUTC_ServerSide();
+        };
+
+        return {
+            runTest: runTest
+        };
+    })();
+
+    $(document).ready(function () {
+        console.log("ready!");
+        $('#start').off('click').on('click', function () { testDateWCF.runTest(); });
+    });
+
+</script>
