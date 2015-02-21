@@ -21,6 +21,12 @@ namespace WCFTestDate
         [OperationContract]
         DateTime checkDateTimeForceUTC(DateTime fechIn);
 
+        [OperationContract]
+        String checkDateTime_JSON (DateTime fechIn);
+        
+        [OperationContract]
+        String checkDateTimeForceUTC_JSON(DateTime fechIn);
+
     }
 
 
