@@ -39,5 +39,41 @@ namespace WebTestDateTime.Controllers
             return new WCFTestDateJaponSrv.WCFTestDateClient().checkDateTimeForceUTC(fech);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+        public String checkDateTime_JSON(String fechIn)
+        {
+            return new WCFTestDateJaponSrv.WCFTestDateClient().checkDateTime_JSON(new JavaScriptSerializer().Deserialize<DateTime>(fechIn));
+        }
+
+        public String checkDateTime_ServerSide_JSON()
+        {
+            DateTime fech = DateTime.Now;
+            return new WCFTestDateJaponSrv.WCFTestDateClient().checkDateTime_JSON(fech);
+        }
+
+        public String checkDateTimeForceUTC_JSON(String fechIn)
+        {
+            return new WCFTestDateJaponSrv.WCFTestDateClient().checkDateTimeForceUTC_JSON(new JavaScriptSerializer().Deserialize<DateTime>(fechIn));
+        }
+
+        public String checkDateTimeForceUTC_ServerSide_JSON(String fechIn)
+        {
+            DateTime fech = DateTime.Now;
+            return new WCFTestDateJaponSrv.WCFTestDateClient().checkDateTimeForceUTC_JSON(fech);
+        }
+
+
+
     }
 }

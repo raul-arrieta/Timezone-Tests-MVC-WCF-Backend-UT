@@ -48,6 +48,34 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="checkDateTime_JSON">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="fechIn" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="checkDateTime_JSONResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="checkDateTime_JSONResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="checkDateTimeForceUTC_JSON">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="fechIn" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="checkDateTimeForceUTC_JSONResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="checkDateTimeForceUTC_JSONResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -135,6 +163,18 @@
   <wsdl:message name="IWCFTestDate_checkDateTimeForceUTC_OutputMessage">
     <wsdl:part name="parameters" element="tns:checkDateTimeForceUTCResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFTestDate_checkDateTime_JSON_InputMessage">
+    <wsdl:part name="parameters" element="tns:checkDateTime_JSON" />
+  </wsdl:message>
+  <wsdl:message name="IWCFTestDate_checkDateTime_JSON_OutputMessage">
+    <wsdl:part name="parameters" element="tns:checkDateTime_JSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFTestDate_checkDateTimeForceUTC_JSON_InputMessage">
+    <wsdl:part name="parameters" element="tns:checkDateTimeForceUTC_JSON" />
+  </wsdl:message>
+  <wsdl:message name="IWCFTestDate_checkDateTimeForceUTC_JSON_OutputMessage">
+    <wsdl:part name="parameters" element="tns:checkDateTimeForceUTC_JSONResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWCFTestDate">
     <wsdl:operation name="Test">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFTestDate/Test" message="tns:IWCFTestDate_Test_InputMessage" />
@@ -147,6 +187,14 @@
     <wsdl:operation name="checkDateTimeForceUTC">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC" message="tns:IWCFTestDate_checkDateTimeForceUTC_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTCResponse" message="tns:IWCFTestDate_checkDateTimeForceUTC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="checkDateTime_JSON">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFTestDate/checkDateTime_JSON" message="tns:IWCFTestDate_checkDateTime_JSON_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFTestDate/checkDateTime_JSONResponse" message="tns:IWCFTestDate_checkDateTime_JSON_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="checkDateTimeForceUTC_JSON">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC_JSON" message="tns:IWCFTestDate_checkDateTimeForceUTC_JSON_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC_JSONResponse" message="tns:IWCFTestDate_checkDateTimeForceUTC_JSON_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IWCFTestDate" type="tns:IWCFTestDate">
@@ -171,6 +219,24 @@
     </wsdl:operation>
     <wsdl:operation name="checkDateTimeForceUTC">
       <soap:operation soapAction="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkDateTime_JSON">
+      <soap:operation soapAction="http://tempuri.org/IWCFTestDate/checkDateTime_JSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkDateTimeForceUTC_JSON">
+      <soap:operation soapAction="http://tempuri.org/IWCFTestDate/checkDateTimeForceUTC_JSON" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
