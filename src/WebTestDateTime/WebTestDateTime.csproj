@@ -246,6 +246,8 @@
     <Content Include="Service References\WCFTestDateJaponSrv\WebTestDateTime.WCFTestDateJaponSrv.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Views\Home\Partial\timezones.json" />
+    <Content Include="Views\Home\Partial\TimeZonePicker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

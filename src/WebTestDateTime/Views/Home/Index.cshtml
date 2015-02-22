@@ -1,86 +1,183 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
-<script type="text/javascript" src="~/Scripts/jquery-1.8.2.min.js"></script>
-<h2>Test</h2>
+﻿<style>
+    .row {
+        display: inline-block;
+        width: 100% !important;
+    }
+    .width150 {
+        width: 150px;
+        float: left;
+    }
+    .width375 {
+        width: 375px;
+        float: left;
+    }
+    .width400 {
+        width: 400px;
+        float: left;
+    }
+</style>
 
-<button id="start">Run test...</button>
-<h3>Notes:</h3>
+<script type="text/javascript" src="~/Scripts/jquery-1.8.2.min.js"></script>
+
+<h2>Test</h2>
+<div class="row">
+    <div class="width150">TimeZona:</div>
+    @Html.Partial("~/Views/Home/Partial/TimeZonePicker.cshtml")
+</div>
+<div class="row"></div>
+<div class="row">
+    <div class="width150">Original:</div>
+    <div class="width400">
+        <input id="original" type="datetime" class="width375" disabled="true" />
+    </div>
+</div>
+<div class="row">
+    <div class="width150">ClientSide:</div>
+    <div class="width400">
+        <input id="clientside" type="datetime" class="width375" disabled="true" />
+    </div>
+
+    <div class="width150">ClientSide offset:</div>
+    <div class="width400">
+        <input id="clientsideOffset" type="datetime" class="width375" disabled="true" />
+    </div>
+
+</div>
+<div class="row">
+    <div class="width150">
+        ClientSideUTC:
+    </div>
+    <div class="width400">
+        <input id="clientsideUTC" type="datetime" class="width375" disabled="true" />
+    </div>
+    <div class="width150">
+        ClientSideUTC offset:
+    </div>
+    <div class="width400">
+        <input id="clientsideUTCOffset" type="datetime" class="width375" disabled="true" />
+    </div>
+</div>
+<div class="row">
+    <div class="width150">
+        ServerSide:
+    </div>
+    <div class="width400">
+        <input id="serverside" type="datetime" class="width375" disabled="true" />
+    </div>
+
+    <div class="width150">
+        ServerSide offset:
+    </div>
+    <div class="width400">
+        <input id="serversideOffset" type="datetime" class="width375" disabled="true" />
+    </div>
+
+</div>
+<div class="row">
+    <div class="width150">
+        ServerSideUTC:
+    </div>
+    <div class="width400">
+        <input id="serversideUTC" type="datetime" class="width375" disabled="true" />
+    </div>
+    <div class="width150">
+        ServerSideUTC offset:
+    </div>
+    <div class="width400">
+        <input id="serversideUTCOffset" type="datetime" class="width375" disabled="true" />
+    </div>
+</div>
+
+
+<div class="row">
+    <button id="start">Run test...</button>
+</div>
+
+@*<h3>Notes:</h3>
     <ul>
         <li>WCF - return DateTime.</li>
         <li>WCF - return JSON.</li>
-    </ul>
+    </ul>*@
 <h3>Request log:</h3>
 <fieldset>
     <div id="test"></div>
 </fieldset>
 
 
-<script type="text/javascript">
-    var testDateWCF = (function () {
-        var url = [
-            { id: 'checkDateTime', url: '@Url.Action("checkDateTime","Home")', returnType: 'datetime' },
-            { id: 'checkDateTimeForceUTC', url: '@Url.Action("checkDateTimeForceUTC", "Home")', returnType: 'datetime' },
-            { id: 'checkDateTime_ServerSide', url: '@Url.Action("checkDateTime_ServerSide", "Home")', returnType: 'datetime' },
-            { id: 'checkDateTimeForceUTC_ServerSide', url: '@Url.Action("checkDateTimeForceUTC_ServerSide", "Home")', returnType: 'datetime' },
-            { id: 'checkDateTime_JSON', url: '@Url.Action("checkDateTime_JSON", "Home")', returnType: 'json' },
-            { id: 'checkDateTime_ServerSide_JSON', url: '@Url.Action("checkDateTime_ServerSide_JSON", "Home")', returnType: 'json' },
-            { id: 'checkDateTimeForceUTC_JSON', url: '@Url.Action("checkDateTimeForceUTC_JSON", "Home")', returnType: 'json' },
-            { id: 'checkDateTimeForceUTC_ServerSide_JSON', url: '@Url.Action("checkDateTimeForceUTC_ServerSide_JSON", "Home")', returnType: 'json' },
+    <script type="text/javascript">
+        var testDateWCF = (function () {
+            var url = [
+                //{ id: 'checkDateTime', url: '@Url.Action("checkDateTime","Home")', returnType: 'datetime', dateTimePicker:'' },
+                //{ id: 'checkDateTimeForceUTC', url: '@Url.Action("checkDateTimeForceUTC", "Home")', returnType: 'datetime', dateTimePicker: '' },
+                //{ id: 'checkDateTime_ServerSide', url: '@Url.Action("checkDateTime_ServerSide", "Home")', returnType: 'datetime', dateTimePicker: '' },
+                //{ id: 'checkDateTimeForceUTC_ServerSide', url: '@Url.Action("checkDateTimeForceUTC_ServerSide", "Home")', returnType: 'datetime', dateTimePicker: '' },
+                { id: 'checkDateTime_JSON', url: '@Url.Action("checkDateTime_JSON", "Home")', returnType: 'json', dateTimePicker: 'clientside' },
+                { id: 'checkDateTime_ServerSide_JSON', url: '@Url.Action("checkDateTime_ServerSide_JSON", "Home")', returnType: 'json', dateTimePicker: 'serverside' },
+                { id: 'checkDateTimeForceUTC_JSON', url: '@Url.Action("checkDateTimeForceUTC_JSON", "Home")', returnType: 'json', dateTimePicker: 'clientsideUTC' },
+                { id: 'checkDateTimeForceUTC_ServerSide_JSON', url: '@Url.Action("checkDateTimeForceUTC_ServerSide_JSON", "Home")', returnType: 'json', dateTimePicker: 'serversideUTC' },
 
-        ];
+            ];
+            var selectedTimezone;
+            var checkDate;
+            var callWCF = function (id) {
+                var currentURL = $.grep(url, function (e) { return e.id == id; });
+                if (currentURL.length == 1) {
+                    $.ajax({
+                        type: "GET",
+                        url: currentURL[0].url,
+                        data: { fechIn: JSON.stringify(checkDate) },
+                        success: function (data) {
+                            log("..success :: ");
+                            if (currentURL[0].returnType == 'datetime') {
+                                log(data);
+                                log(" - " + id + "<br />");
+                            }
+                            else if (currentURL[0].returnType == 'json') {
+                                var seconds = parseInt(data.substr(8, 13));
+                                var secondsOffset = seconds + (parseInt(selectedTimezone.offset) * 3600000);
+                                log(JSON.stringify(new Date(seconds)) + " -> " + JSON.stringify(new Date(secondsOffset)) + " - " + id + "<br />");
+                                $('#' + currentURL[0].dateTimePicker).val(new Date(seconds));
+                                $('#' + currentURL[0].dateTimePicker + 'Offset').val(new Date(secondsOffset));
+                            }
 
-        var checkDate;
-        var callWCF = function (id) {
-            var currentURL = $.grep(url, function (e) { return e.id == id; });
-            if (currentURL.length == 1) {
-                $.ajax({
-                    type: "GET",
-                    url: currentURL[0].url,
-                    data: { fechIn: JSON.stringify(checkDate) },
-                    success: function (data) {
-                        log("..success :: ");
-                        if (currentURL[0].returnType == 'datetime') { log(data); }
-                        else if (currentURL[0].returnType == 'json') { log(JSON.stringify( Date(parseInt(data.substr(6))))); }
-                        log(" - " + id);
-                        log("<br />");
-                    },
-                    error: function () {
-                        log(".." + id + " - error :: ");
-                        log("<br />");
-                    }
-                });
-            }
-        };
+                        },
+                        error: function () {
+                            log(".." + id + " - error :: ");
+                            log("<br />");
+                        }
+                    });
+                }
+            };
+            var log = function (content) {
+                $('#test').append(content);
+            };
+            var runTest = function () {
+                log('---------------------------------------------------------<br/>');
+                checkDate = new Date();
+                log("run test :: ");
+                selectedTimezone = timezoneSelectorControl.getSelectedTimeZone();
+                log("<br/>SelectedTimeZone:");
+                log(JSON.stringify(selectedTimezone));
+                log("<br/>");
+                log(JSON.stringify(checkDate));
+                $('#original').val(checkDate);
+                log("<br/>");
+                //callWCF('checkDateTime');
+                //callWCF('checkDateTimeForceUTC');
+                //callWCF('checkDateTime_ServerSide');
+                //callWCF('checkDateTimeForceUTC_ServerSide');
+                callWCF('checkDateTime_JSON');
+                callWCF('checkDateTimeForceUTC_JSON');
+                callWCF('checkDateTime_ServerSide_JSON');
+                callWCF('checkDateTimeForceUTC_ServerSide_JSON');
+            };
+            return {
+                runTest: runTest
+            };
+        })();
 
-        var log = function (content) {
-            $('#test').append(content);
-        };
+        $(document).ready(function () {
+            $('#start').off('click').on('click', function () { testDateWCF.runTest(); });
+        });
 
-        var runTest = function () {
-            log('---------------------------------------------------------<br/>');
-            checkDate = new Date();
-            log("run test :: ");
-            log(JSON.stringify(checkDate));
-            log("<br/>");
-            callWCF('checkDateTime');
-            callWCF('checkDateTimeForceUTC');
-            callWCF('checkDateTime_ServerSide');
-            callWCF('checkDateTimeForceUTC_ServerSide');
-            callWCF('checkDateTime_JSON');
-            callWCF('checkDateTimeForceUTC_JSON');
-            callWCF('checkDateTime_ServerSide_JSON');
-            callWCF('checkDateTimeForceUTC_ServerSide_JSON');
-        };
-
-        return {
-            runTest: runTest
-        };
-    })();
-
-    $(document).ready(function () {
-        console.log("ready!");
-        $('#start').off('click').on('click', function () { testDateWCF.runTest(); });
-    });
-
-</script>
+    </script>
